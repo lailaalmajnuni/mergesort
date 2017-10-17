@@ -1,0 +1,99 @@
+
+    #include <iostream>
+    #include <cassert>
+    
+    using namespace std;
+
+    template <class T>
+    void merge(T a[], T x[], int s, int e, int m) {
+    // s = start of range to sort
+    // e = end of range to sort
+        int i, j, k;
+        i = s;
+        k = 0;
+        j = m + 1;
+    
+        while (i <= m && j <= e)
+        {
+            if (a[i] < a[j])
+            {
+                x[k] = a[i];
+                k++;
+                i++;
+            }
+            else
+            {
+                x[k] = a[j];
+                k++;
+                j++;
+            }
+        }
+    
+        while (i <= m)
+        {
+            x[k] = a[i];
+            k++;
+            i++;
+        }
+    
+        while (j <= e)
+        {
+            x[k] = a[j];
+            k++;
+            j++;
+        }
+    
+        //allocate data back from x[] into a[].
+        for (i = s; i <= e; i++)
+        {
+            a[i] = x[i-s];
+        }
+    }
+    
+    template <class T>
+    void msort (T a[], T x[], int s, int e) {
+        if (e - s < 1){
+            return;
+        }
+        int m = (e + s)/2;
+        msort<T>(a, x, s, m);
+        msort<T>(a, x, m + 1, e);
+        merge<T>(a, x, s, e, m);
+    }
+    
+    template <class T>
+    void mergesort(T a[], int n) {
+        T *x = new int[n];
+        msort(a,x,0, n-1);
+        delete []x;
+    }
+    
+    template <class T>
+    bool sorted( T a[], int n) {
+        for (int i=0; i<n-1; ++i){
+            if (a[i] > a[i+1])
+                return false;
+        }
+        return true;
+    }
+    
+    int main(int argc, char * args[]) {
+        int a[1000];
+        for (int i = 0; i < 1000; ++i) a[i] = -50 + rand() % 100;
+        mergesort<int>(a, 1000);
+        assert(sorted<int>(a, 1000));
+    
+        int b[1001];
+        for (int i = 0; i < 1001; ++i) b[i] = -50 + rand() % 100;
+        mergesort<int>(b, 1001);
+        assert(sorted<int>(b, 1001));
+    
+        int c[] = { 2 };
+        mergesort<int>(c, 1);
+        assert(sorted<int>(c, 1));
+    
+        int d[] = { 1, 2, 3, 4, 5 };
+        mergesort<int>(d, 5);
+        assert(sorted<int>(d, 5));
+        cout << "All tests passed." << endl;
+    }
