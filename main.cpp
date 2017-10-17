@@ -6,11 +6,56 @@ using namespace std;
 // s = start of range to sort
 // e = end of range to sort
 void msort(int a[], int x[], int s, int e) {
-	// stub
+	int len=(e-s+10);
+	int *b = new int[len]();
+	s= a[0];
+	e= a[len-1];
+	int m= (e-s)/2;
+	int i, j, k;
+	i = s;
+	k = 0;
+	j = m + 1;
+
+	while (i <= m && j <= e)
+	{
+		if (a[i] < a[j])
+		{
+			x[k] = a[i];
+			k++;
+			i++;
+		}
+		else
+		{
+			x[k] = a[j];
+			k++;
+			j++;
+		}
+	}
+
+	while (i <= m)
+	{
+		x[k] = a[i];
+		k++;
+		i++;
+	}
+ 
+	while (j <= e)
+	{
+		x[k] = a[j];
+		k++;
+		j++;
+	}
+
+	for (i = s; i <= e; i++)
+	{
+		a[i] = x[i-s];
+	}
 }
 
 void mergesort(int a[], int n) {
-	// stub
+	x = new int[len];
+	msort(a,x,0, --i);
+	delete []x;
 }
 
 bool sorted(int a[], int n) {
