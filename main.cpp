@@ -81,4 +81,5 @@ int main(int argc, char * args[]) {
 	assert(sorted(d, 5));
 */
 	cout << "All tests passed." << endl;	
+	return 0;
 }
