@@ -36,7 +36,6 @@ void msort(int a[], int x[], int s, int e) {
 		}
 	}
 
-
 	while (i <= m)
 	{
 		x[k] = a[i];
@@ -44,7 +43,6 @@ void msort(int a[], int x[], int s, int e) {
 		i++;
 	}
  
-
 	while (j <= e)
 	{
 		x[k] = a[j];
